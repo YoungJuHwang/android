@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta name="format-detection" content="telephone=no" charset="UTF-8">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <!-- 팝업 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.1/magnific-popup.css" />
+
+        <title>TOB | Hanbit</title>
+    </head>
+    <body>
+    <nav data-role="header" data-theme="b" >
+        <div class="navbar navbar-inverse" >
+            <div class="container-fluid" >
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" style="width: 100%;">
+                        <li><a class="navbar-brand" href="#"><img src="../img/logo.png" alt="" /></a></li>
+                        <li><span class="glyphicon glyphicon-home" aria-hidden="true"></span></li>
+                        <li><span class="glyphicon glyphicon-book" aria-hidden="true"></span></li>
+                        <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div role="main" id="content" class="ui-content">
+        <h3>로그인</h3>
+        <label for="txt-email">ID입력</label>
+        <input type="text" name="id" id="id" value="">
+        <label for="txt-password">Password입력</label>
+        <input type="password" name="password" id="password" value="">
+        <fieldset data-role="controlgroup">
+            <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+            <label for="chck-rememberme">ID 저장</label>
+        </fieldset>
+        <a href="#" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">로그인</a>
+        <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">ID/Password 찾기</a></p>
+        <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+            <div role="main" class="ui-content">
+                <h3 class="mc-text-danger">로그인실패</h3>
+                <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+            </div>
+        </div>
+    </div><!-- /content -->
+    <div data-role="footer" data-theme="b"> <!-- 막대스타일 -->
+        <h2>한빛이앤씨</h2>
+    </div>
+    $(function(){
+    $('#btn-submit').click(function(){
+    member.login();
+    });
+    });
+
+    var member = {
+    login : function(){
+
+    var id = $('#id').val();
+    var password = $('#password').val();
+
+    $.ajax("http://fkod51.cafe24.com/member/login_mobile",{
+    data : {'id':id, 'pw':password},
+    dataType : "json",
+    success : function(data) {
+    if(data != null){
+
+    location.href='menu.html';
+    /* $('#content').empty();
+    var menu ='';
+    $('#content').html(booking); */
+    } else{
+    alert("아이디 패스워드를 다시한번 확인해주세요");
+    }
+    },
+    error : function() {
+    alert('상태 : '+status + ',메시지 : '+msg);
+    }
+    });
+    }
+    };
+
+    </script>
+    </body>
+</html>
